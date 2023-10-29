@@ -1,0 +1,36 @@
+h1{
+
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+
+}
+
+.topnav {
+    margin-top: -100px;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid yellowgreen;
+    background-color: brown
+    
+
+
+}
+
+.topnav a {
+    
+    text-decoration: none;
+    color: #00a316;
+    margin-right: 15px; /* Add space between navigation links */
+    
+    }
+
+body {
+    background-color: blue;
+    background-image: url('"C:\Covid Project\Covid Project\CovidApp-643dd18b753bcadcf7fd0971b62609e6523b4dfc\CovidApp-643dd18b753bcadcf7fd0971b62609e6523b4dfc\Frontend\Image\introduce2.jpg"');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
