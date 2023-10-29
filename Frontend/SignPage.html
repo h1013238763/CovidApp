@@ -14,21 +14,23 @@
     <div class="content">
       <div class="ImagePanel"
            style="width: 100%;
-                  height: 100%">
+                  height: 99.5%;
+                  overflow: hidden;
+                  position: relative;">
         <!-- image -->
         <img src="Image/introduce1.jpg" alt="Introduce Image" class="ShowImage" id="show_image">
         <!-- right image cover-->
         <div style="background: linear-gradient(to left, #c0ec9100, #c0ec91);
                     position: absolute;
-                    top: 5em;
+                    top: 0em;
                     left: 0em;
                     width: 6em;
                     height:52em;"></div>
         <!--left image cover-->
         <div style="background: linear-gradient(to right, #c0ec9100, #c0ec91);
                     position: absolute;
-                    top: 5em;
-                    left: 114em;
+                    top: 0em;
+                    right: 0em;
                     width: 6em;
                     height:52em;"></div>
         <!-- image switch buttons-->
@@ -49,16 +51,16 @@
         <!-- Input Field -->
         <div class="InputContainer">
           <div class="InputComponent">
-            <label for="username" class="InputLable">Username</label>
+            <label class="InputLable">Username</label>
             <input type="text" id="username" name="username" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="SignUsernameInputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="password" class="InputLable">Password</label>
+            <label class="InputLable">Password</label>
             <input type="text" id="password" name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="SignPasswordInputInfo"></label>
             <button class="PanelSmallButton"
                     onclick="SwitchPanel(2)" 
                     style="position:relative;
@@ -68,34 +70,35 @@
         </div>
           
           <!-- Button -->
-        <button class="PanelLargeButton">Sign in</button>
+        <button class="PanelLargeButton" onclick="SigninEvent()">Sign in</button>
         <button class="PanelSmallButton" onclick="SwitchPanel(1)">Create Account</button>
       </div> 
       <!-- register panel -->
       <div class="Panel" id="register_panel" style="display: none;">
         <h2 class="PanelTitle">Create Account</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
         <div class="InputContainer">
           <div class="InputComponent">
             <label for="username" class="InputLable">Username</label>
-            <input type="text" id="username" name="username" class="InputField">
+            <input type="text" name="username" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="email" class="InputLable">email</label>
-            <input type="text" id="password" name="password" class="InputField">
+            <label class="InputLable">email</label>
+            <input type="text" name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="password" class="InputLable">Password</label>
-            <input type="text" id="username" name="username" class="InputField">
+            <label class="InputLable">Password</label>
+            <input type="text" name="username" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="password2" class="InputLable">Confirm Password</label>
-            <input type="text" id="username" name="username" class="InputField">
+            <label class="InputLable">Confirm Password</label>
+            <input type="text name="username" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
@@ -106,10 +109,11 @@
       <!-- forget password panel -->
       <div class="Panel" id="forget_password_panel" style="display: none;">
         <h2 class="PanelTitle">Forget Password</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
         <div class="InputContainer">
           <div class="InputComponent">
-            <label for="email" class="InputLable">email</label>
-            <input type="text" id="password" name="password" class="InputField">
+            <label class="InputLable">email</label>
+            <input type="text" name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
@@ -119,22 +123,23 @@
       <!-- reset password panel -->
       <div class="Panel" id="reset_password_panel" style="display: none;">
         <h2 class="PanelTitle">Forget Password</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
         <div class="InputContainer">
           <div class="InputComponent">
-            <label for="email" class="InputLable">reset code</label>
-            <input type="text" id="email" name="password" class="InputField">
+            <label class="InputLable">reset code</label>
+            <input type="text name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="email" class="InputLable">password</label>
-            <input type="text" id="password" name="password" class="InputField">
+            <label class="InputLable">password</label>
+            <input type="text name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>
           <div class="InputComponent">
-            <label for="email" class="InputLable">reset password</label>
-            <input type="text" id="password" name="password" class="InputField">
+            <label class="InputLable">reset password</label>
+            <input type="text" name="password" class="InputField">
             <!-- additional input field component, error massage and buttons-->
             <label class="InputInfo"></label>
           </div>

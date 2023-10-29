@@ -17,7 +17,7 @@ body {
 .content {
     background-color: #c0ec91;
     height: 52em;
-    width: 120em;
+    width: 100%;
 }
 
 .footer {
@@ -109,6 +109,8 @@ body {
 
     background-color: f6f6f6;
     
+    padding-left: 0.3em;
+
     border-radius: 0.9em;
     border: 0.26em solid #6d9f38;
     box-shadow: none;
@@ -119,15 +121,20 @@ body {
 }
 
 .ShowImage{
-    position: absolute;
-    width: 120em;
-    height: 52em;
+
+    height: 100%;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: center center;
 
     top: 5em;
     transition: opacity 0.8s;
+    margin-top: 0.25%;
 }
 
 .PanelLargeButton{
+    
     background-color: #6d9f38;
     border: none;
     border-radius: 1.5em;
@@ -195,6 +202,29 @@ body {
     cursor: pointer;
 }
 .ImageButton:active{
+    cursor: pointer;
+}
+
+.ReturnButton{
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    height: 1.5em;
+    width: 1.5em;
+
+    border: none;
+
+    background-image: url("../Image/ReturnButton.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    background-position: center center;
+    cursor: pointer;
+}
+.ReturnButton:hover{
+    cursor: pointer;
+}
+.ReturnButton:active{
     cursor: pointer;
 }
 
