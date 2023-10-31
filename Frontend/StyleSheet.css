@@ -1,0 +1,221 @@
+/* 使用CSS来定义样式 */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+h1{
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.header {
+    background-color: #ffffff;  /*background color*/
+    color: #3a3a3a;    /* text color*/
+    text-align: left;
+    padding: 0px;
+    height: 78px;
+    z-index: 0;
+}
+
+.content {
+    background-color: #c0ec91;
+    padding: 0px;
+    height: 823px;
+    z-index: 0;
+}
+
+.footer {
+    background-color: #ffffff;
+    color: #fff;        /* text color*/
+    text-align: center;
+    padding: 20px;
+    z-index: 0;
+}
+
+.AppIcon{
+    position: absolute;
+    top: -5px;
+    left:12px;
+    width:150px;
+    height:75px;
+    z-index: 0;
+}
+
+.AppTitle{
+    position: absolute;
+    color: #444444;
+    top: 5px;
+    left:60px;
+    width:150px;
+    height:75px;
+    z-index: 1;
+}
+
+.Panel{
+    
+    display: grid;
+    grid-template-rows: repeat(auto-fit);
+
+    /*self attribute*/
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    /*self position*/
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -55%);
+    left:1400px;
+
+    padding-bottom: 20px;
+    z-index: 3;
+}
+
+.PanelTitle{
+    position: relative;
+    top: -10px;
+    left: 20px;
+
+    grid-row: 1;
+    grid-column: 1;
+    /*Font setting*/
+    font-size: 26px;
+    color:#2f2f2f
+}
+
+.InputContainer{
+    display: grid;
+    grid-template-rows: repeat(auto-fit);
+
+    grid-row: 2;
+    grid-column: 1;
+
+    align-content: center;
+
+    margin-bottom: 20px;
+}
+
+
+.InputComponent{
+    display: grid;
+    background-color: #ffffff;
+    width: 250px;
+    align-content: center;
+    padding-left: 25px;
+    margin-top: 0px;
+    margin-bottom:15px;
+}
+
+.InputLabel{
+    position: relative;
+    left: 100px;
+
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.InputField{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 250px;
+    height: 30px;
+
+    background-color: f6f6f6;
+
+    padding-left: 10px;
+    
+    border-radius: 10px;
+    border: 3px solid #6d9f38;
+    box-shadow: none;
+}
+
+.InputInfo{
+    color: #ff6565;
+}
+
+.ShowImage{
+    position: absolute;
+    width: 100%;
+    height: 823px;
+
+    top:78px;
+    transition: opacity 0.8s;
+    z-index: 1;
+}
+
+.PanelLargeButton{
+    background-color: #6d9f38;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 200px;
+    /*Button text setting*/
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    justify-self: center;
+
+    margin: 5px;
+}
+.PanelLargeButton:hover{
+    background-color: #72a53c;
+    cursor: pointer;
+}
+.PanelLargeButton:active{
+    background-color: #689834;
+    cursor: pointer;
+}
+
+.PanelSmallButton{
+    color:#6d9f38;
+    background-color: #ffffff00;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.PanelSmallButton:hover{
+    cursor: pointer;
+}
+.PanelSmallButton:active{
+    cursor: pointer;
+    color: #61922d;
+}
+
+.TextButton{
+    color:#383838;
+    background-color: #ffffff00;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.TextButton:hover{
+    cursor: pointer;
+}
+.TextButton:active{
+    cursor: pointer;
+}
+
+.ImageButton{
+    border-radius: 10px;
+    border: 2px solid #c0ec91;
+    background-color: #ffffff;
+
+    color: #ffffff;
+
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    transition: width 0.3s;
+}
+.ImageButton:hover{
+    cursor: pointer;
+}
+.ImageButton:active{
+    cursor: pointer;
+}
