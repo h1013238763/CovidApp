@@ -101,7 +101,7 @@ function SigninEvent()
     if(ServerResponseTrue(data, "http://localhost:3000/api/login"))
     {
         // transfer to user page
-        window.location.href = 'page2.html';
+        window.location.href = 'SurveyPage.html';
     }
     else
     {

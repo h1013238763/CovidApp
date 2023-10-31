@@ -52,26 +52,24 @@
         <div class="InputContainer">
           <div class="InputComponent">
             <label class="InputLable">Username</label>
-            <input type="text" id="username" name="username" class="InputField">
+            <input type="text" id="sign_username_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo" id="SignUsernameInputInfo"></label>
+            <label class="InputInfo" id="sign_username_info"></label>
           </div>
           <div class="InputComponent">
             <label class="InputLable">Password</label>
-            <input type="text" id="password" name="password" class="InputField">
+            <input type="password" id="sign_password_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo" id="SignPasswordInputInfo"></label>
-            <button class="PanelSmallButton"
-                    onclick="SwitchPanel(2)" 
-                    style="position:relative;
-                           top: 0.1em;
-                           left: 4em;">Forget Password</button>
+            <label class="InputInfo" id="sign_password_info"></label>
           </div>
         </div>
           
           <!-- Button -->
         <button class="PanelLargeButton" onclick="SigninEvent()">Sign in</button>
-        <button class="PanelSmallButton" onclick="SwitchPanel(1)">Create Account</button>
+        <div style=" display: grid; align-content: center; padding-left: 2em; width: 15em;">
+          <button class="PanelSmallButton" onclick="SwitchPanel(1)" style=" grid-row: 1; grid-column: 1;">Create Account</button>
+          <button class="PanelSmallButton" onclick="SwitchPanel(2)" style=" grid-row: 1; grid-column: 2;">Forget Password</button>
+        </div>
       </div> 
       <!-- register panel -->
       <div class="Panel" id="register_panel" style="display: none;">
@@ -80,48 +78,48 @@
         <div class="InputContainer">
           <div class="InputComponent">
             <label for="username" class="InputLable">Username</label>
-            <input type="text" name="username" class="InputField">
+            <input type="text" id="register_username_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="register_username_info" style=" color: gray">length 6-12</label>
           </div>
           <div class="InputComponent">
             <label class="InputLable">email</label>
-            <input type="text" name="password" class="InputField">
+            <input type="text" id="register_email_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="register_email_info"></label>
           </div>
           <div class="InputComponent">
             <label class="InputLable">Password</label>
-            <input type="text" name="username" class="InputField">
+            <input type="password" id="register_password_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="register_password_info" style=" color: gray">length 6-12</label>
           </div>
           <div class="InputComponent">
             <label class="InputLable">Confirm Password</label>
-            <input type="text name="username" class="InputField">
+            <input type="password" id="register_confirm_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="register_confirm_info" ></label>
           </div>
         </div>
 
-        <button class="PanelLargeButton">Create Account</button>
+        <button class="PanelLargeButton" onclick="CreateAccountEvent()">Create Account</button>
       </div>
       <!-- forget password panel -->
-      <div class="Panel" id="forget_password_panel" style="display: none;">
+      <div class="Panel" id="forget_panel" style="display: none;">
         <h2 class="PanelTitle">Forget Password</h2>
         <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
         <div class="InputContainer">
           <div class="InputComponent">
             <label class="InputLable">email</label>
-            <input type="text" name="password" class="InputField">
+            <input type="text" id="forget_email_input" class="InputField">
             <!-- additional input field component, error massage and buttons-->
-            <label class="InputInfo"></label>
+            <label class="InputInfo" id="forget_email_info"></label>
           </div>
         </div>
         <button class="PanelLargeButton">Send Email</button>
       </div>
       <!-- reset password panel -->
-      <div class="Panel" id="reset_password_panel" style="display: none;">
+      <div class="Panel" id="reset_panel" style="display: none;">
         <h2 class="PanelTitle">Forget Password</h2>
         <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
         <div class="InputContainer">
@@ -149,8 +147,8 @@
     </div>
     <!-- Foot -->
     <div class="footer">
-      <button class="TextButton" onclick="window.location.href = 'about.html'">About us</button>
-      <button class="TextButton" onclick="window.location.href = 'covid symptoms page.html'">Covid-19 symptoms</button>
+      <button class="TextButton">About us</button>
+      <button class="TextButton">Covid-19 symptoms</button>
     </div>
 </body>
 </html>
