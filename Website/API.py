@@ -86,7 +86,6 @@ def login():
 def createAccount():
     #example input for request body {"username": "test", "password": "test", "email": "test"}
     data = request.get_json()
-    print(request.get_json())
     if data.get("username") in in_memory_user_dictionary:
         return jsonify(userAuthenticated="false", error_mes="user already exist...login."), 200
     else:
