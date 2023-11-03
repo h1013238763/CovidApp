@@ -1,8 +1,8 @@
 <html>
 <head>
     <title>Hummingbird Covid Service</title>
-    <link rel="stylesheet" type="text/css" href="CSS/SignStyleSheet.css">
-    <script src="Scripts/SignPageHandler.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
+    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
 </head>
 <body>
     <!-- Title -->
@@ -18,7 +18,7 @@
                   overflow: hidden;
                   position: relative;">
         <!-- image -->
-        <img src="Image/introduce1.jpg" alt="Introduce Image" class="ShowImage" id="show_image">
+        <img src="{{ url_for('static', filename='Image/introduce1.jpg') }}" alt="Introduce Image" class="ShowImage" id="show_image">
         <!-- right image cover-->
         <div style="background: linear-gradient(to left, #c0ec9100, #c0ec91);
                     position: absolute;

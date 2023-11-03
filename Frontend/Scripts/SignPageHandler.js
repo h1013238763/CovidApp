@@ -8,7 +8,7 @@ function ChangeImage()
 
     image.style.opacity = 0;
     setTimeout(function () {
-        image.src = "Image/introduce"+index+".jpg";
+        image.src = "{{ url_for('static', filename='Image/introduce"+index+".jpg') }}";
         image.style.opacity = 1;
     }, 800);
 
@@ -98,7 +98,7 @@ function SigninEvent()
 
     console.log("sign in 2");
     // transfer to server
-    if(ServerResponseTrue(data, "http://localhost:3000/api/login"))
+    if(ServerResponseTrue(data, "http://localhost:5000/api/login"))
     {
         // transfer to user page
         window.location.href = 'SurveyPage.html';
@@ -119,8 +119,8 @@ function CreateAccountEvent()
     
     const data = {
         username: document.getElementById("register_username_input").value,
-        email: document.getElementById("register_email_input").value,
-        password: document.getElementById("register_password_input").value
+        password: document.getElementById("register_password_input").value,
+        email: document.getElementById("register_email_input").value
     };
     // username check
     if(data.username.length < 6 || data.username.length > 12)
@@ -178,7 +178,7 @@ function CreateAccountEvent()
 
     console.log("create 2");
     // transfer data
-    if(ServerResponseTrue(data, "http://localhost:3000/api/create_account"))
+    if(ServerResponseTrue(data, "http://localhost:5000/api/create_account"))
     {
         SwitchPanel(0);
     }
