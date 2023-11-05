@@ -1,0 +1,240 @@
+/* 使用CSS来定义样式 */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    background-color: #ffffff;  /*background color*/
+    color: #3a3a3a;    /* text color*/
+    text-align: left;
+    height: 5em;
+
+}
+
+.content {
+    background-color: #c0ec91;
+    height: 52em;
+    width: 120em;
+}
+
+.footer {
+    background-color: #ffffff;
+    color: #fff;        /* text color*/
+    text-align: center;
+    padding: 1.2em;
+}
+
+.AppIcon{
+    position: absolute;
+    top: -0.5em;
+    left: 0.8em;
+    width: 9em;
+    aspect-ratio: 16/9;
+}
+
+.AppTitle{
+    position: absolute;
+    color: #444444;
+    top: 0.20em;
+    left: 2.3em;
+    font-size: 1.6em;
+}
+
+.Panel{
+    
+    display: grid;
+    grid-template-rows: repeat(auto-fit);
+
+    /*self attribute*/
+    width: 19em;
+    background-color: #ffffff;
+    border-radius: 1.5em;
+    /*self position*/
+    position: absolute;
+    top: 20em;
+    right: 7em;
+
+    padding-bottom: 1.25em;
+    z-index: 3;
+}
+
+.PanelTitle{
+    position: relative;
+    top: -0.3em;
+    left: 0.8em;
+
+    grid-row: 1;
+    grid-column: 1;
+    /*Font setting*/
+    font-size: 1.6em;
+    color:#2f2f2f
+}
+
+.InputContainer{
+    display: grid;
+    grid-template-rows: repeat(auto-fit);
+
+    grid-row: 2;
+    grid-column: 1;
+
+    align-content: center;
+
+    margin-bottom: 1.5em;
+}
+
+.InputComponent{
+    display: grid;
+    background-color: #ffffff;
+    width: 17em;
+    align-content: center;
+    padding-left: 1.5em;
+    margin-bottom: 0.7em;
+}
+
+.InputLabel{
+    position: relative;
+
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.InputField{
+    position: relative;
+
+    width: 19em;
+    height: 2.3em;
+
+    background-color: f6f6f6;
+    
+    border-radius: 0.9em;
+    border: 0.26em solid #6d9f38;
+    box-shadow: none;
+}
+
+.InputInfo{
+    color: #ff6565;
+}
+
+.ShowImage{
+    position: absolute;
+    width: 120em;
+    height: 52em;
+
+    top: 5em;
+    transition: opacity 0.8s;
+}
+
+.PanelLargeButton{
+    background-color: #6d9f38;
+    border: none;
+    border-radius: 1.5em;
+    height: 2.4em;
+    width: 12em;
+    /*Button text setting*/
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+    justify-self: center;
+
+    margin: 0.4em;
+}
+.PanelLargeButton:hover{
+    background-color: #72a53c;
+    cursor: pointer;
+}
+.PanelLargeButton:active{
+    background-color: #689834;
+    cursor: pointer;
+}
+
+.PanelSmallButton{
+    color:#6d9f38;
+    background-color: #ffffff00;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.PanelSmallButton:hover{
+    cursor: pointer;
+}
+.PanelSmallButton:active{
+    cursor: pointer;
+    color: #61922d;
+}
+
+.TextButton{
+    color:#383838;
+    background-color: #ffffff00;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.TextButton:hover{
+    cursor: pointer;
+}
+.TextButton:active{
+    cursor: pointer;
+}
+
+.ImageButton{
+    border-radius: 1em;
+    border: 0.22em solid #c0ec91;
+    background-color: #ffffff;
+
+    color: #ffffff;
+
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0.7em;
+    transition: width 0.3s;
+}
+.ImageButton:hover{
+    cursor: pointer;
+}
+.ImageButton:active{
+    cursor: pointer;
+}
+
+/*User Page Components*/
+.UserIconCover{
+    position: absolute;
+    right: 3em;
+    top: 2em;
+    width: 4em;
+    height: 4em;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.UserIcon{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.UserName{
+    position: absolute;
+    right: 8em;
+    top: 3.5em;
+    font-weight: bold;
+    text-align: right;
+}
+
+.UserPanel{
+    display: grid;
+    grid-template-rows: repeat(auto-fit);
+
+    /*self attribute*/
+    width: 19em;
+    background-color: #ffffff;
+    border-radius: 1.5em;
+    /*self position*/
+    position: absolute;
+    top: 15em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding-bottom: 1.25em;
+    z-index: 3;
+}
