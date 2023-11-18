@@ -1,6 +1,10 @@
 from flask import Blueprint, jsonify, request, redirect
 import pickle
 import os
+from . import db 
+from .Models import User, BlogPost, SecurityQuestions  # Import User model # Import db instance
+import random
+
 API = Blueprint('API', __name__)
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -33,10 +37,6 @@ def reformat_input(content):
     reformatted_content['AGE'] = int(content.get('AGE', 0))
 
     return reformatted_content
-
-
-#temporary data struct for handling authentication => will be replaced with database for prototype 2
-in_memory_user_dictionary = {}
 
 
 
@@ -72,28 +72,78 @@ def predict():
 
 @API.route('/api/login', methods=['POST'])
 def login():
-    #example input for request body {"username": "test", "password": "test"}
     data = request.get_json()
-    if data.get("username") not in in_memory_user_dictionary:
-        return jsonify(userAuthenticated="false", error_mes="username not found || create account..."), 200
-    elif in_memory_user_dictionary[data.get("username")]['password'] != data.get("password"):
+    # Query the database for the user
+    user = User.query.filter_by(username=data.get("username")).first()
+    if user:
+        if user.password == data.get("password"):
+            return jsonify(userAuthenticated="true"), 200
+    elif user.password != data.get("password"):
         return jsonify(userAuthenticated="false", error_mes="password incorrect"), 200
     else: 
-        return jsonify(userAuthenticated="true"), 200
+        return jsonify(userAuthenticated="false", error_mes="username not found || create account..."), 200
         
 
 @API.route('/api/create_account', methods=['POST'])
 def createAccount():
-    #example input for request body {"username": "test", "password": "test", "email": "test"}
     data = request.get_json()
-    print(request.get_json())
-    if data.get("username") in in_memory_user_dictionary:
-        return jsonify(userAuthenticated="false", error_mes="user already exist...login."), 200
+    if User.query.filter_by(username=data.get('username')).first():
+        return jsonify(userAccountCreated="false", error_mes="user already exist...login."), 200
     else:
-        in_memory_user_dictionary[data.get("username")] = {'password': data.get("password"), 'email': data.get("email")}
-        print(in_memory_user_dictionary)
-        return jsonify(userAuthenticated="true"), 200
-    
+        new_user = User(id=random.randint(1000,1000000),username=data.get("username"), password=data.get("password"), email=data.get("email"))
+        new_security_q1 = SecurityQuestions(id=random.randint(1000,1000000), username=new_user.username, question=data.get("question1"), answer=data.get("answer1"), qnumber=1)
+        new_security_q2 = SecurityQuestions(id=random.randint(1000,1000000), username=new_user.username, question=data.get("question2"), answer=data.get("answer2"), qnumber=2)
+        db.session.add(new_user)
+        db.session.add(new_security_q1)
+        db.session.add(new_security_q2)
+        db.session.commit()  # For debugging
+        for a in SecurityQuestions.query.all():
+            print(a.username, a.question, a.answer, a.qnumber, a.id)
+        return jsonify(userAccountCreated="true"), 200
+
+
+def to_dict(row):
+    return {column.name: getattr(row, column.name) for column in row.__table__.columns}
+
+
+#first step and window allowing user to enter username example input {"username": "test"}
+@API.route('/api/forgot_password', methods=['POST'])
+def forgotPassword():
+    data = request.get_json()
+    user = User.query.filter_by(username=data.get("username")).first()
+    if not user:
+        return jsonify(nextStep="false", error_mes="username not found || create account..."), 200
+    else:
+        security_q = SecurityQuestions.query.filter_by(username=data.get("username")).all()
+        questions = [to_dict(q) for q in security_q]
+        return jsonify(nextStep="true", security_questions=questions ), 200 
+#===================================================================================================
+
+
+#example input {"username": "test", "firstA": "test", "secondA": "test", "new_password": "test"}
+@API.route('/api/change_password', methods=['POST'])
+def verifySecurityQuestions():
+    data = request.get_json()
+    user = User.query.filter_by(username=data.get("username")).first()
+    if not user:
+        return jsonify(nextStep="false", error_mes="username not found || create account..."), 200
+    else:
+        security_q1 = SecurityQuestions.query.filter_by(username=user.username, answer=data.get("firstA")).first()
+        security_q2 = SecurityQuestions.query.filter_by(username=user.username, answer=data.get("secondA")).first()
+        # if not security_q1 or not security_q2:
+        #     return jsonify(nextStep="false", error_mes="security questionsincorrect..."), 200
+        if not security_q1:
+            return jsonify(nextStep="false", error_mes="first security question incorrect...", qindex=1), 200
+        if not security_q2:
+            return jsonify(nextStep="false", error_mes="second security question incorrect...", qindex=2), 200
+        if data.get("new_password") != "":
+            user.password = data.get("new_password")
+            db.session.commit()
+            return jsonify(nextStep="true", mess="password updated."), 200
+        else:
+            return jsonify(nextStep="false", err_mes="new username cannot be empty"), 200
+
+
 
 if __name__ == '__main__':
     API.run(debug=True)
