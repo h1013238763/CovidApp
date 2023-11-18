@@ -143,6 +143,24 @@ def verifySecurityQuestions():
         else:
             return jsonify(nextStep="false", err_mes="new username cannot be empty"), 200
 
+#example input {"username": "test12", title: "test", body: "test"}
+@API.route('/api/add_request_blog', methods=['POST']):
+def addRequestBlog():
+    data=request.get_json()
+    if data.get("title") == "" or data.get("body") == "":
+        return jsonify(blogPostRequested="false", error_mes="title and body cannot be empty"), 200
+    new_blog_post = BlogPost(id=random.randint(1000,1000000), title=data.get("title"), body=data.get("body"), author=data.get("username", verified=False))
+    db.session.add(new_blog_post)
+    db.session.commit()
+    return jsonify(blogPostRequested="true"), 200
+
+#just call the function to retrive user verified blog posts by us
+@API.route('/api/get_blog_posts', methods=['GET'])
+def getBlogPosts():
+    blog_posts = BlogPost.query.filter_by(verified=True).all()
+    posts = [to_dict(post) for post in blog_posts]
+    return jsonify(blog_posts=posts), 200
+
 
 
 if __name__ == '__main__':
