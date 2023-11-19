@@ -2,8 +2,9 @@ from flask import Blueprint, jsonify, request, redirect
 import pickle
 import os
 from . import db 
-from .Models import User, BlogPost, SecurityQuestions  # Import User model # Import db instance
+from .Models import User, BlogPost, SecurityQuestions, UserPredictions  # Import User model # Import db instance
 import random
+from sqlalchemy import desc
 
 API = Blueprint('API', __name__)
 
@@ -62,7 +63,9 @@ def predict():
 
         # Make prediction
         prediction = model.predict_proba(feature_array)
-        
+        predi = UserPredictions(id=random.randint(1000,1000000), username=content.get("username"), prediction=prediction[0][1])
+        db.session.add(predi)
+        db.session.commit()
         # Return probability (the second class)
         return jsonify({"probability": prediction[0][1]})
 
@@ -144,7 +147,7 @@ def verifySecurityQuestions():
             return jsonify(nextStep="false", err_mes="new username cannot be empty"), 200
 
 #example input {"username": "test12", title: "test", body: "test"}
-@API.route('/api/add_request_blog', methods=['POST']):
+@API.route('/api/add_request_blog', methods=['POST'])
 def addRequestBlog():
     data=request.get_json()
     if data.get("title") == "" or data.get("body") == "":
@@ -161,7 +164,16 @@ def getBlogPosts():
     posts = [to_dict(post) for post in blog_posts]
     return jsonify(blog_posts=posts), 200
 
-
+@API.route('/api/get_user_predictions_log', methods=['POST'])
+def getUserPredictionsLog():
+    data = request.get_json()
+    # Retrieve the most recent two entries for the given username
+    user_predictions = UserPredictions.query.filter_by(username=data.get("username")).order_by(desc(UserPredictions.date_posted)).limit(2).all()
+    predictions = [to_dict(prediction) for prediction in user_predictions]
+    if user_predictions:
+        return jsonify(status="true", predictions=predictions), 200
+    else:
+        return jsonify(status="false", error_mes="no predictions found..."), 200
 
 if __name__ == '__main__':
     API.run(debug=True)

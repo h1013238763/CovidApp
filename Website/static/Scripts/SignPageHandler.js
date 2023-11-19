@@ -1,6 +1,9 @@
 index = 1;
 const panel_list = ["sign_in_panel", "register_panel", "forget_panel", "reset_panel"];
 
+let userObject ={} // user object to store user information after sign in => {username, email} 
+
+
 // Sign Page Image Change Functions
 function ChangeImage()
 {
