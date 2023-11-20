@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
+    <script>        
+        function sendDataToServer() {
+            const data = {
+                SEX: document.querySelector('input[name="SEX"]:checked').value,
+                AGE: document.getElementById("age").value,
+                DIABETES: document.querySelector('input[name="DIABETES"]:checked').value,
+                OBESITY: document.querySelector('input[name="OBESITY"]:checked').value,
+                ASTHMA: document.querySelector('input[name="ASTHMA"]:checked').value,
+                TOBACCO: document.querySelector('input[name="TOBACCO"]:checked').value,
+            };
+            
+            fetch("/api/predict", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById("predict_value").textContent = (result.probability*100).toFixed(2) + " %";
+                console.log(result.probability)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function initialSurvey()
+        {
+            
+        }
+    </script>
+</head>
+<body>
+    <!-- Title -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='Image/CovidAppIcon.png') }}" alt="The Icon of App" class="AppIcon">
+        <h2 class="AppTitle">Hummingbird</h2>
+        <div class "UserIconCover">
+            <img src="{{ url_for('static', filename='Image/UserImage.png') }}" alt="The Icon of user" class="UserIcon">
+        </div>
+        <label class="UserName" id="UserName">Welcome, User</label>
+    </div>
+    <!-- Survey Form -->
+    <div class="content">
+        <div class="Panel" id="survey-container" style="
+                display: grid;
+                align-items: center;
+                left: 50%;
+                top:50%;
+                transform: translate(-50%, -50%);">
+            <label class="PanelTitle" style="left: 0.5em; top:0.3em; margin-bottom: 1em;">Covid-19 Survey</label>
+                
+            <!--Sex input-->
+            <div class="SurveyComponent">
+                <label for="sex" class="SurveyText" style="left: 0.5em">Sex:</label>
+                <input type="radio" id="diabetes-yes" name="SEX" value="male"> male
+                <input type="radio" id="diabetes-no" name="SEX" value="female"> female
+            </div>  
+                
+                <!--Age input-->
+            <div class="SurveyComponent">
+                <label for="age" class="InputLabel">Age:</label>
+                <input type="number" id="age" name="AGE" class="SurveyInput">
+            </div>
+
+                <!--Diabetes input-->
+            <div class="SurveyComponent">
+                <label for="diabetes" class="InputLabel">Diabetes:</label>
+                <input type="radio" id="diabetes-yes" name="DIABETES" value="yes"> Yes
+                <input type="radio" id="diabetes-no" name="DIABETES" value="no"> No
+            </div>
+
+            <!--obesity input-->
+            <div class="SurveyComponent">
+                <label for="obesity" class="InputLabel">Obesity:</label>
+                <input type="radio" id="obesity-yes" name="OBESITY" value="yes"> Yes
+                <input type="radio" id="obesity-no" name="OBESITY" value="no"> No
+            </div>
+
+            <!--asthma input-->
+            <div class="SurveyComponent">
+                <label for="asthma" class="InputLabel">Asthma:</label>
+                <input type="radio" id="asthma-yes" name="ASTHMA" value="yes"> Yes
+                <input type="radio" id="asthma-no" name="ASTHMA" value="no"> No
+            </div>
+
+            <!--tobacco input-->
+            <div class="SurveyComponent">
+                <label for="tobacco" class="InputLabel">Tobacco:</label>
+                <input type="radio" id="tobacco-yes" name="TOBACCO" value="yes"> Yes
+                <input type="radio" id="tobacco-no" name="TOBACCO" value="no"> No
+            </div>
+                
+            <button type="button" class="PanelLargeButton" onclick="sendDataToServer()">Submit</button>
+
+            <div class="SurveyComponent" style="margin-top: 1em;">
+                <label for="patient-type" class="InputLabel">Patient Type:</label>
+                <label for="patient-type" id="predict_value">0 %</label>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <button class="TextButton">About us</button>
+        <button class="TextButton" id="covid-symptoms-button">Covid-19 Symptoms</button>
+    </div>
+</body>
+</html>
