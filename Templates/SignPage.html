@@ -1,0 +1,187 @@
+<html>
+<head>
+    <title>Hummingbird Covid Service</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
+    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
+</head>
+<body>
+    <!-- Title -->
+    <div class="header">
+      <img src="{{ url_for('static', filename='Image/CovidAppIcon.png') }}" alt="The Icon of App" class="AppIcon">
+      <h2 class="AppTitle">Hummingbird</h2>
+    </div>
+    <!-- Body-->
+    <div class="content">
+      <div class="ImagePanel"
+           style="width: 100%;
+                  height: 99.5%;
+                  overflow: hidden;
+                  position: relative;">
+        <!-- image -->
+        <img src="{{ url_for('static', filename='Image/introduce1.jpg') }}" alt="Introduce Image" class="ShowImage" id="show_image">
+        <!-- right image cover-->
+        <div style="background: linear-gradient(to left, #c0ec9100, #c0ec91);
+                    position: absolute;
+                    top: 0em;
+                    left: 0em;
+                    width: 6em;
+                    height:52em;"></div>
+        <!--left image cover-->
+        <div style="background: linear-gradient(to right, #c0ec9100, #c0ec91);
+                    position: absolute;
+                    top: 0em;
+                    right: 0em;
+                    width: 6em;
+                    height:52em;"></div>
+        <!-- image switch buttons-->
+        <div class="ImageButtonPanel"
+             style="position: absolute;
+                    width: 10em;
+                    left: 35%;
+                    top: 47em;
+                    z-index: 2;"
+             data-url="{{ url_for('static', filename='Image/introduce') }}"
+             id = "image_button_panel">
+          <button class="ImageButton" onclick="ChangeImageIndex(1)" id="image_button_1">1</button>
+          <button class="ImageButton" onclick="ChangeImageIndex(2)" id="image_button_2">2</button>
+          <button class="ImageButton" onclick="ChangeImageIndex(3)" id="image_button_3">3</button>
+        </div>
+      </div>
+      <!-- Sign in Panel, default-->
+      <div class="Panel" id="sign_in_panel"  style="display: grid;">
+        <!-- Panel title -->
+        <h2 class="PanelTitle">Sign in</h2>
+        <!-- Input Field -->
+        <div class="InputContainer">
+          <div class="InputComponent">
+            <label class="InputLable">Username</label>
+            <input type="text" id="sign_username_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="sign_username_info"></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Password</label>
+            <input type="password" id="sign_password_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="sign_password_info"></label>
+          </div>
+        </div>
+          
+          <!-- Button -->
+        <button class="PanelLargeButton" onclick="SigninEvent()">Sign in</button>
+        <div style=" display: grid; align-content: center; padding-left: 2em; width: 15em;">
+          <button class="PanelSmallButton" onclick="SwitchPanel(1)" style=" grid-row: 1; grid-column: 1;">Create Account</button>
+          <button class="PanelSmallButton" onclick="SwitchPanel(2)" style=" grid-row: 1; grid-column: 2;">Forget Password</button>
+        </div>
+      </div> 
+      <!-- register panel -->
+      <div class="Panel" id="register_panel" style="display: none;">
+        <h2 class="PanelTitle">Create Account</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
+        <div class="InputContainer">
+          <div class="InputComponent">
+            <label for="username" class="InputLable">Username</label>
+            <input type="text" id="register_username_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_username_info" style=" color: gray">length 6-12</label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Email</label>
+            <input type="text" id="register_email_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_email_info"></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Password</label>
+            <input type="password" id="register_password_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_password_info" style=" color: gray">length 6-12</label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Confirm Password</label>
+            <input type="password" id="register_confirm_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_confirm_info" ></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Security Question 1</label>
+            <input type="text" id="register_sq1_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_sq1_info" ></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Security Answer 1</label>
+            <input type="text" id="register_sa1_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_sa1_info" ></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Security Question 2</label>
+            <input type="text" id="register_sq2_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_sq2_info" ></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Security Answer 2</label>
+            <input type="text" id="register_sa2_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="register_sa2_info" ></label>
+          </div>
+        </div>
+
+        <button class="PanelLargeButton" onclick="CreateAccountEvent()">Create Account</button>
+      </div>
+      <!-- forget password panel -->
+      <div class="Panel" id="forget_panel" style="display: none;">
+        <h2 class="PanelTitle">Forget Password</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(0)"></button>
+        <div class="InputContainer">
+          <div class="InputComponent">
+            <label class="InputLable">Username</label>
+            <input type="text" id="forget_username_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="forget_username_info"></label>
+          </div>
+        </div>
+        <button class="PanelLargeButton" onclick="ForgetEvent()">Reset Password</button>
+      </div>
+      <!-- reset password panel -->
+      <div class="Panel" id="reset_panel" style="display: none;">
+        <h2 class="PanelTitle">Forget Password</h2>
+        <button class="ReturnButton" onclick="SwitchPanel(2)"></button>
+        <div class="InputContainer">
+          <div class="InputComponent">
+            <label class="InputLable" id="reset_sq1"></label>
+            <input type="text" id="reset_sa1_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="reset_sa1_info"></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable" id="reset_sq2"></label>
+            <input type="text" id="reset_sa2_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="reset_sa2_info"></label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Password</label>
+            <input type="password" id="reset_password_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="reset_password_info" style=" color: gray">length 6-12</label>
+          </div>
+          <div class="InputComponent">
+            <label class="InputLable">Confirm Password</label>
+            <input type="password" id="reset_confirm_input" class="InputField">
+            <!-- additional input field component, error massage and buttons-->
+            <label class="InputInfo" id="reset_confirm_info"></label>
+          </div>
+        </div>
+        <button class="PanelLargeButton" onclick="ResetEvent()">Reset Password</button>
+      </div>
+    </div>
+    <!-- Foot -->
+    <div class="footer">
+      <button class="TextButton" onclick="window.location.href = '/about'">About us</button>
+      <button class="TextButton" onclick="window.location.href = '/symptoms'">Covid-19 symptoms</button>
+    </div>
+</body>
+</html>
