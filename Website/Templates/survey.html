@@ -3,39 +3,7 @@
 <head>
     <title>User Home</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
-    <script>        
-        function sendDataToServer() {
-            const data = {
-                SEX: document.querySelector('input[name="SEX"]:checked').value,
-                AGE: document.getElementById("age").value,
-                DIABETES: document.querySelector('input[name="DIABETES"]:checked').value,
-                OBESITY: document.querySelector('input[name="OBESITY"]:checked').value,
-                ASTHMA: document.querySelector('input[name="ASTHMA"]:checked').value,
-                TOBACCO: document.querySelector('input[name="TOBACCO"]:checked').value,
-            };
-            
-            fetch("/api/predict", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                document.getElementById("predict_value").textContent = (result.probability*100).toFixed(2) + " %";
-                console.log(result.probability)
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-
-        function initialSurvey()
-        {
-            
-        }
-    </script>
+    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
 </head>
 <body>
     <!-- Title -->
@@ -47,6 +15,15 @@
         </div>
         <label class="UserName" id="UserName">Welcome, User</label>
     </div>
+    <!-- set username -->
+    <script>    
+        var storedUserInfo = localStorage.getItem("userObject");
+        if (storedUserInfo) {
+            var userObject = JSON.parse(storedUserInfo);
+            console.log(userObject);
+            document.getElementById("UserName").textContent = "Welcome, " + userObject.username;
+        }
+    </script>
     <!-- Survey Form -->
     <div class="content">
         <div class="Panel" id="survey-container" style="

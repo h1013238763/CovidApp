@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/Aboutus.css') }}">
+</head>
+<body>
+
+    <header> 
+        <h1>Frequently Asked Questions</h1>
+    </header>
+
+    <nav class="topnav">
+        <a href="#" onclick="window.location.href = '/symptoms'"> Covid Symptoms </a>
+        <a href="#" onclick="window.location.href = '/about'"> About </a>
+        <a href="#" onclick="window.location.href = '/FAQ'"> FAQ </a>
+    </nav>
+
+    <main> 
+        <section class="faq-section">
+            <h2 class="custom-header">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3 class="question">Do I need an account to get Covid information?</h3>
+                <p class="answer">Yes, you need to sign up at the home page to receive Covid information.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3 class="question">How Accurate is the Covid Information Hummingbird provides?</h3>
+                <p class="answer">Our model is 70% accurate currently at this time.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3 class="question">Is Covid Life Threatening?</h3>
+                <p class="answer">Yes, Covid is life-threatening, and if you think you have symptoms, get medical attention ASAP!</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="question">How do I assess how vulnerable I am to Covid with HummingBird?</h3>
+                <p class="answer">Our model is 70% accurate currently at this time.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2023 HummingBird 
+    </footer>
+
+</body>
+</html>

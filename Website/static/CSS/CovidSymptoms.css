@@ -12,6 +12,7 @@ h1 {
     padding: 10px;
     border: 1px solid yellowgreen;
     background-color: rgba(165, 42, 42, 0.7); /* 0.7 is the opacity value */
+    
 }
 
 .topnav a {
@@ -38,3 +39,4 @@ ul {
     padding: 4px;
     opacity: 0.8;
 }
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='CSS/BlogSheet.css') }}"
+    />
+  <title>Blog Title</title>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Blog Title</h1>
+      <p>Subtitle or tagline goes here</p>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <div class="container">
+        <h2>On the Predictability of COVID-19</h2>
+        <p class="metadata">Published on September 30, 2021</p>
+        <div class="content">
+          <!-- Your blog content goes here -->
+        </div>
+      </div>
+    </article>
+
+    <!-- Form to add a new blog post -->
+    <form id="blogForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="body">Body:</label>
+      <textarea id="body" name="body" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Blog Name. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Event listener for the form submission
+    document.getElementById('blogForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get form data
+      const formData = {
+        username: document.getElementById('username').value,
+        title: document.getElementById('title').value,
+        body: document.getElementById('body').value
+      };
+
+      // Make a POST request to the backend
+      fetch('/api/add_request_blog', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response from the backend
+        if (data.blogPostRequested === 'true') {
+          // Blog post added successfully
+          alert('Blog post added successfully!');
+        } else {
+          // Blog post addition failed
+          alert('Failed to add blog post. Error: ' + data.error_mes);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>

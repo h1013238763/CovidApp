@@ -18,3 +18,15 @@ def about():
 @views.route('/symptoms')
 def symptoms():
     return render_template('covid symptoms.html')
+
+@views.route('/FAQ')
+def faq():
+    return render_template('Faq page.html')
+
+@views.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+@views.route('/userhome')
+def userhome():
+    return render_template('home.html')

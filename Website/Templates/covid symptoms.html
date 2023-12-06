@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/CovidSymptoms.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/Aboutus.css') }}">
 </head>
+<style>
+
+
+    body { 
+        transition: background-color 1s ease;
+    }
+    
+</style>
 <body>
     <div class="background-image">
         <h1>Covid Symptoms</h1>
 
-        <div class="topnav">
-            <a class="active" href="#CovidSymptoms">Covid Symptoms</a>
-            <a href="#about">About</a>
-        </div>
+        <nav class="topnav">
+        <a href="#" onclick="window.location.href = '/symptoms'"> Covid Symptoms </a>
+        <a href="#" onclick="window.location.href = '/about'"> About </a>
+        <a href="#" onclick="window.location.href = '/FAQ'"> FAQ </a>
+        </nav>
 
         <h2>Symptoms of Covid</h2>
 
@@ -90,6 +99,15 @@
         <p>For more resources in LA County, check the site below!</p>
 
         <a href="http://publichealth.lacounty.gov/acd/ncorona2019/covidtests/">For LA County Resources</a>
+        <br>
+        <br>
 
         <footer>
-            &copy;
+            &copy; All Rights Reserved to HummingBird @2023
+        </footer>
+
+    </div>
+
+    <script src="CovidSymptoms.js"></script>
+</body>
+</html>

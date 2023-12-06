@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/CovidSymptoms.css') }}">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/Aboutus.css') }}">
 </head>
 <body>
-    <div class="background-image">
+    <header>
         <h1>About Us</h1>
+    </header>
 
-        <div class="topnav">
-            <a class="active" href="#CovidSymptoms">Covid Symptoms</a>
-            <a href="covid symptoms.html"> Covid Symptoms</a>
-            <a href="#about">About</a>
-        </div>
+    <nav class="topnav">
+        <a href="#" onclick="window.location.href = '/symptoms'"> Covid Symptoms </a>
+        <a href="#" onclick="window.location.href = '/about'"> About </a>
+        <a href="#" onclick="window.location.href = '/FAQ'"> FAQ </a>
+    </nav>
 
-        <h2About Humming bird</h2>
+    <main>
+        <section class="about-section">
+            <h2>About Hummingbird</h2>
 
+            <p class="styled-paragraph">Hummingbird provides a fast way of assessing the risk of Covid-19. Users can input their symptoms, history, and other factors to receive an assessment of the likelihood of having COVID-19. Hummingbird also provides an assessment of infection severity and offers information on getting officially tested and treated. We focus on using information from the greater Los Angeles area.</p>
+        </section>
+    </main>
 
-        <p>For more resources in LA County, check the site below!</p>
-
+    <footer>
         <a href="http://publichealth.lacounty.gov/acd/ncorona2019/covidtests/">For LA County Resources</a>
+        <p>&copy; Your Company</p>
+    </footer>
+</body>
+</html>
 
-        <footer>
-            &copy;
+
+
+
+
+
+            <!--- Make highlights less prominent
+            
+            Make the color go from green to gray 
+
+            Make portions colored of the page
+
+            Make the ends of yellow stop when words end
+
+            - Make everything visible 
+
+            - Fix font sizes on headers 
+
+            - Change the size of header borders
+            
+            
+            -->
+    
