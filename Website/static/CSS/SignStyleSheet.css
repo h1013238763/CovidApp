@@ -260,43 +260,36 @@ body {
     text-align: right;
 }
 
-.UserPanel{
-    display: grid;
-    grid-template-rows: repeat(auto-fit);
-
-    /*self attribute*/
-    width: 19em;
+.UserPanel {
+    display: block; /* Changed to block for better control, can also use flex */
+    width: 70%; /* or a fixed width if you prefer */
+    max-width: 600px; /* Maximum width of the panel */
+    min-width: 300px; /* Minimum width of the panel */
     background-color: #ffffff;
     border-radius: 1.5em;
-    /*self position*/
     position: absolute;
-    top: 15em;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    padding-bottom: 1.25em;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the positioning to the center */
+    padding: 1.25em;
     z-index: 3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow */
 }
+
 .SurveyToggle{
     border-radius: 1em;
     border: 0.22em solid #c0ec91;
     background-color: #ffffff;
-
     color: #ffffff;
-
     width: 1.5em;
 }
 
 .SurveyInput{
     position: relative;
-
     width: 15em;
     height: 1.5em;
-
-    background-color: f6f6f6;
-    
+    background-color: #f6f6f6;
     padding-left: 0.3em;
-
     border-radius: 0.9em;
     border: 0.2em solid #6d9f38;
     box-shadow: none;
@@ -304,12 +297,10 @@ body {
 
 .SurveyComponent{
     display: grid;
+    grid-template-columns: auto 1fr; /* Adjust the column sizes as needed */
+    align-items: center; /* Center items vertically */
+    gap: 0.5em; /* Space between grid items */
     background-color: #ffffff;
-
-    grid-auto-flow: column;
-
-    width: 17em;
-    align-content: center;
-    padding-left: 1.5em;
-    margin-bottom: 0.7em;
+    padding: 0.5em 1.5em; /* Padding inside each component */
+    margin-bottom: 0.7em; /* Space between components */
 }

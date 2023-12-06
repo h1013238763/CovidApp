@@ -2,20 +2,138 @@
 <html>
 <head>
     <title>User Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
     <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
+    <style>
+        /* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c0ec91;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Panel Styles */
+.Panel {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px;
+}
+
+.PanelTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Survey List Styles */
+.survey-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.SurveyComponent {
+    margin-bottom: 15px;
+}
+
+.SurveyText, .InputLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input Styles */
+input[type="radio"], input[type="number"] {
+    margin-right: 10px;
+}
+
+.SurveyInput, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Button Styles */
+.PanelLargeButton {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.PanelLargeButton:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #ddd;
+}
+
+.TextButton {
+    background: none;
+    border: none;
+    color: #007bff;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.TextButton:hover {
+    text-decoration: underline;
+}
+.footer {
+    width: 100%;
+    position: fixed; /* or 'absolute' if you don't want it to stay at the bottom when scrolling */
+    bottom: 0;
+    left: 0;
+    background-color: white; /* Your choice of background color */
+    color: #333; /* Your choice of text color */
+    text-align: center;
+    padding: 10px 0; /* Adjust the padding to your preference */
+}
+
+/* Footer Button Styles */
+.TextButton {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    color: black; /* Your choice of link color */
+    text-decoration: none;
+    font-size: 16px; /* Adjust the font size to your preference */
+    cursor: pointer;
+}
+
+.TextButton:hover {
+    text-decoration: underline;
+}
+
+/* This ensures that the content doesn't go under the footer */
+body {
+    padding-bottom: 60px; /* This should be equal or larger than the total height of your footer */
+}
+    </style>
 </head>
 <body>
-    <!-- Title -->
-    <div class="header">
-        <img src="{{ url_for('static', filename='Image/CovidAppIcon.png') }}" alt="The Icon of App" class="AppIcon">
-        <h2 class="AppTitle">Hummingbird</h2>
-        <div class "UserIconCover">
-            <img src="{{ url_for('static', filename='Image/UserImage.png') }}" alt="The Icon of user" class="UserIcon">
-        </div>
-        <label class="UserName" id="UserName">Welcome, User</label>
-    </div>
-    <!-- set username -->
+
     <script>    
         var storedUserInfo = localStorage.getItem("userObject");
         if (storedUserInfo) {
@@ -24,69 +142,87 @@
             document.getElementById("UserName").textContent = "Welcome, " + userObject.username;
         }
     </script>
+
+
     <!-- Survey Form -->
     <div class="content">
-        <div class="Panel" id="survey-container" style="
-                display: grid;
-                align-items: center;
-                left: 50%;
-                top:50%;
-                transform: translate(-50%, -50%);">
-            <label class="PanelTitle" style="left: 0.5em; top:0.3em; margin-bottom: 1em;">Covid-19 Survey</label>
-                
-            <!--Sex input-->
-            <div class="SurveyComponent">
-                <label for="sex" class="SurveyText" style="left: 0.5em">Sex:</label>
-                <input type="radio" id="diabetes-yes" name="SEX" value="male"> male
-                <input type="radio" id="diabetes-no" name="SEX" value="female"> female
-            </div>  
-                
-                <!--Age input-->
-            <div class="SurveyComponent">
-                <label for="age" class="InputLabel">Age:</label>
-                <input type="number" id="age" name="AGE" class="SurveyInput">
-            </div>
+<div class="Panel" id="survey-container">
+    <h2 class="PanelTitle">Covid-19 Survey</h2>
+    <ul class="survey-list">
+        <!-- Fever -->
+        <li class="SurveyComponent">
+            <label for="fever" class="SurveyText">Fever:</label>
+            <input type="radio" id="fever-yes" name="Fever" value="yes"> Yes
+            <input type="radio" id="fever-no" name="Fever" value="no"> No
+        </li>
 
-                <!--Diabetes input-->
-            <div class="SurveyComponent">
-                <label for="diabetes" class="InputLabel">Diabetes:</label>
-                <input type="radio" id="diabetes-yes" name="DIABETES" value="yes"> Yes
-                <input type="radio" id="diabetes-no" name="DIABETES" value="no"> No
-            </div>
+        <!-- Tiredness -->
+        <li class="SurveyComponent">
+            <label for="tiredness" class="SurveyText">Tiredness:</label>
+            <input type="radio" id="tiredness-yes" name="Tiredness" value="yes"> Yes
+            <input type="radio" id="tiredness-no" name="Tiredness" value="no"> No
+        </li>
 
-            <!--obesity input-->
-            <div class="SurveyComponent">
-                <label for="obesity" class="InputLabel">Obesity:</label>
-                <input type="radio" id="obesity-yes" name="OBESITY" value="yes"> Yes
-                <input type="radio" id="obesity-no" name="OBESITY" value="no"> No
-            </div>
+        <!-- Dry Cough -->
+        <li class="SurveyComponent">
+            <label for="dry-cough" class="SurveyText">Dry Cough:</label>
+            <input type="radio" id="dry-cough-yes" name="Dry-Cough" value="yes"> Yes
+            <input type="radio" id="dry-cough-no" name="Dry-Cough" value="no"> No
+        </li>
 
-            <!--asthma input-->
-            <div class="SurveyComponent">
-                <label for="asthma" class="InputLabel">Asthma:</label>
-                <input type="radio" id="asthma-yes" name="ASTHMA" value="yes"> Yes
-                <input type="radio" id="asthma-no" name="ASTHMA" value="no"> No
-            </div>
+        <!-- Difficulty in Breathing -->
+        <li class="SurveyComponent">
+            <label for="difficulty-breathing" class="SurveyText">Difficulty in Breathing:</label>
+            <input type="radio" id="difficulty-breathing-yes" name="Difficulty-in-Breathing" value="yes"> Yes
+            <input type="radio" id="difficulty-breathing-no" name="Difficulty-in-Breathing" value="no"> No
+        </li>
 
-            <!--tobacco input-->
-            <div class="SurveyComponent">
-                <label for="tobacco" class="InputLabel">Tobacco:</label>
-                <input type="radio" id="tobacco-yes" name="TOBACCO" value="yes"> Yes
-                <input type="radio" id="tobacco-no" name="TOBACCO" value="no"> No
-            </div>
-                
-            <button type="button" class="PanelLargeButton" onclick="sendDataToServer()">Submit</button>
+        <!-- Sore Throat -->
+        <li class="SurveyComponent">
+            <label for="sore-throat" class="SurveyText">Sore Throat:</label>
+            <input type="radio" id="sore-throat-yes" name="Sore-Throat" value="yes"> Yes
+            <input type="radio" id="sore-throat-no" name="Sore-Throat" value="no"> No
+        </li>
 
-            <div class="SurveyComponent" style="margin-top: 1em;">
-                <label for="patient-type" class="InputLabel">Patient Type:</label>
-                <label for="patient-type" id="predict_value">0 %</label>
-            </div>
-        </div>
-    </div>
+        <!-- No Symptoms -->
+        <li class="SurveyComponent">
+            <label for="none-symptom" class="SurveyText">No Symptoms:</label>
+            <input type="radio" id="none-symptom-yes" name="None_Sympton" value="yes"> Yes
+            <input type="radio" id="none-symptom-no" name="None_Sympton" value="no"> No
+        </li>
+
+        <!-- Age -->
+        <li class="SurveyComponent">
+            <label for="age" class="InputLabel">Age:</label>
+            <input type="number" id="age" name="AGE" class="SurveyInput" min="1" max="100">
+        </li>
+
+        <!-- Severity Level -->
+        <li class="SurveyComponent">
+            <label for="severity" class="InputLabel">Severity Level:</label>
+            <select id="severity" name="SEVERITY_LEVEL" class="SurveyInput">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </li>
+    </ul>
+
+    <button type="button" class="PanelLargeButton" onclick="sendDataToServer()">Submit</button>
+
+    <li class="SurveyComponent" style="margin-top: 1em;">
+        <label for="patient-outcome" class="InputLabel">Patient Type:</label>
+        <label for="patient-outcome" id="predict_value">0 %</label>
+        <label for="patient-outcome" id="action">none</label>
+    </li>
+</div>
+
     <!-- Footer -->
-    <div class="footer">
-        <button class="TextButton">About us</button>
-        <button class="TextButton" id="covid-symptoms-button">Covid-19 Symptoms</button>
+    <div class="footer"">
+        <a href="/about" class="TextButton">About us</a>
+    <a href="/symptoms" class="TextButton" id="covid-symptoms-button">Covid-19 Symptoms</a>
+    <a href="/FAQ" class="TextButton">FAQ</a>
     </div>
 </body>
 </html>

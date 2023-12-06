@@ -344,17 +344,23 @@ function ResetEvent() {
       console.error("Error:", error);
     });
 }
-
 function sendDataToServer() {
   console.log("Send Event 1");
 
   const data = {
-    SEX: document.querySelector('input[name="SEX"]:checked').value,
     AGE: document.getElementById("age").value,
-    DIABETES: document.querySelector('input[name="DIABETES"]:checked').value,
-    OBESITY: document.querySelector('input[name="OBESITY"]:checked').value,
-    ASTHMA: document.querySelector('input[name="ASTHMA"]:checked').value,
-    TOBACCO: document.querySelector('input[name="TOBACCO"]:checked').value,
+    Fever: document.querySelector('input[name="Fever"]:checked').value,
+    Tiredness: document.querySelector('input[name="Tiredness"]:checked').value,
+    "Dry-Cough": document.querySelector('input[name="Dry-Cough"]:checked')
+      .value,
+    "Difficulty-in-Breathing": document.querySelector(
+      'input[name="Difficulty-in-Breathing"]:checked'
+    ).value,
+    "Sore-Throat": document.querySelector('input[name="Sore-Throat"]:checked')
+      .value,
+    None_Sympton: document.querySelector('input[name="None_Sympton"]:checked')
+      .value,
+    SEVERITY_LEVEL: document.getElementById("severity").value,
   };
 
   fetch("/api/predict", {
@@ -366,9 +372,24 @@ function sendDataToServer() {
   })
     .then((response) => response.json())
     .then((result) => {
-      document.getElementById("predict_value").textContent =
-        (result.probability * 100).toFixed(2) + " %";
-      console.log(result.probability);
+      const predictValueElement = document.getElementById("predict_value");
+      const messageElement = document.getElementById("action");
+
+      // Update the prediction value
+      predictValueElement.textContent = "Server Prediction: " + result.modelPrediction_v2 + "; ";
+
+      // Check the model prediction and display a message accordingly
+      if (result.modelPrediction_v2 === 1) {
+        messageElement.textContent =
+          "You may have COVID-19. Please consult a healthcare professional.";
+      } else if (result.modelPrediction_v2 === 0) {
+        messageElement.textContent =
+          "Based on the model, you may not have COVID-19.";
+      } else {
+        // Handle other cases if needed
+        messageElement.textContent = "Prediction not available.";
+      }
+
     })
     .catch((error) => {
       console.error("Error:", error);
