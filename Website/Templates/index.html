@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hummingbird Covid Service</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .navbar {
+            background-color: #4caf50; /* Green background to match your app theme */
+            overflow: hidden;
+            width: 100%; /* Ensure navbar takes full width */
+            position: fixed; /* Fix navbar to the top */
+            top: 0; /* Align navbar to the top */
+            left: 0; /* Align navbar to the left */
+            z-index: 1000; /* Ensure navbar stays on top of other content */
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #3e8e41; /* Darker green for hover effect */
+        }
+        #content-container {
+            padding-top: 60px; /* Add padding to top of content to account for fixed navbar */
+        }
+    </style>
+    <!-- Include other CSS files here if you have any -->
+</head>
+<body>
+
+    <div class="navbar">
+        <!-- Your navbar content -->
+        <a href="#" class="nav-link" data-page="home">Home</a>
+        <a href="#" class="nav-link" data-page="survey">Survey</a>
+        <a href="#" class="nav-link" data-page="blog">Blog</a>
+        <label style="font-size: large;float: right; color: white; padding: 14px 20px;" id="UserName">Welcome, User</label>
+        
+    </div>
+      <script>    
+        var storedUserInfo = localStorage.getItem("userObject");
+        if (storedUserInfo) {
+            var userObject = JSON.parse(storedUserInfo);
+            console.log(userObject);
+            document.getElementById("UserName").textContent = "Welcome, " + userObject.username;
+        }
+    </script>
+
+    <div id="content-container">
+        <!-- Content will be loaded here dynamically -->
+    </div>
+    <script>
+         function loadPage(page) {
+            fetch('/api/load_page/' + page)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('content-container').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the 'home' page by default
+            loadPage('home');
+
+            var navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor click behavior
+                    var page = this.getAttribute('data-page'); // Get the data-page value
+                    loadPage(page); // Load the clicked page
+                });
+            });
+        });
+    </script>
+    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
+
+</body>
+</html>

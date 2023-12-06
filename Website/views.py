@@ -29,4 +29,5 @@ def blog():
 
 @views.route('/userhome')
 def userhome():
-    return render_template('home.html')
+    return render_template('index.html')
+

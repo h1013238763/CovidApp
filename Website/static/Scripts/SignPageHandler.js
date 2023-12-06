@@ -37,8 +37,7 @@ function ChangeImageIndex(image_index) {
   ChangeImage();
 }
 function ChangeIndex() {
-  if(window.location.pathname === "/")
-  {
+  if (window.location.pathname === "/") {
     index++;
     if (index > 3) {
       index = 1;
@@ -105,6 +104,7 @@ function SigninEvent() {
       if (result.userAuthenticated == "true") {
         // save user info into local storage
         localStorage.setItem("userObject", JSON.stringify(result.user));
+
         // transfer to user page
         window.location.href = "/userhome";
       } else {
@@ -282,14 +282,20 @@ function ResetEvent() {
 
   var is_illegal = false;
 
-  if (document.getElementById("reset_sa1_input").value != userObject.security_questions[0].answer) {
+  if (
+    document.getElementById("reset_sa1_input").value !=
+    userObject.security_questions[0].answer
+  ) {
     document.getElementById("reset_sa1_info").textContent =
       "secrity answer incorrect";
     is_illegal = true;
   } else {
     document.getElementById("reset_sa1_info").textContent = "";
   }
-  if (document.getElementById("reset_sa2_input").value != userObject.security_questions[1].answer) {
+  if (
+    document.getElementById("reset_sa2_input").value !=
+    userObject.security_questions[1].answer
+  ) {
     document.getElementById("reset_sa2_info").textContent =
       "secrity answer incorrect";
     is_illegal = true;
@@ -340,31 +346,31 @@ function ResetEvent() {
 }
 
 function sendDataToServer() {
-
   console.log("Send Event 1");
 
   const data = {
-      SEX: document.querySelector('input[name="SEX"]:checked').value,
-      AGE: document.getElementById("age").value,
-      DIABETES: document.querySelector('input[name="DIABETES"]:checked').value,
-      OBESITY: document.querySelector('input[name="OBESITY"]:checked').value,
-      ASTHMA: document.querySelector('input[name="ASTHMA"]:checked').value,
-      TOBACCO: document.querySelector('input[name="TOBACCO"]:checked').value,
+    SEX: document.querySelector('input[name="SEX"]:checked').value,
+    AGE: document.getElementById("age").value,
+    DIABETES: document.querySelector('input[name="DIABETES"]:checked').value,
+    OBESITY: document.querySelector('input[name="OBESITY"]:checked').value,
+    ASTHMA: document.querySelector('input[name="ASTHMA"]:checked').value,
+    TOBACCO: document.querySelector('input[name="TOBACCO"]:checked').value,
   };
-  
+
   fetch("/api/predict", {
-      method: "POST",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   })
-  .then(response => response.json())
-  .then(result => {
-      document.getElementById("predict_value").textContent = (result.probability*100).toFixed(2) + " %";
-      console.log(result.probability)
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+    .then((response) => response.json())
+    .then((result) => {
+      document.getElementById("predict_value").textContent =
+        (result.probability * 100).toFixed(2) + " %";
+      console.log(result.probability);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }

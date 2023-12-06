@@ -212,14 +212,9 @@ class API_CONTROLLER:
             return jsonify(status="false", error_mes="no predictions found..."), 200
         
     def NAV_loadPage(self, page):
-        # Depending on the page parameter, load the appropriate HTML content
-        if page == 'home':
-            html_content = render_template('home.html')
-        elif page == 'survey':
-            html_content = render_template('survey.html')
-        elif page == 'blog':
-            html_content = render_template('blog.html')
-        else:
-            return jsonify({'error': 'Page not found'})
-
-        return jsonify({'html': html_content})
+        try:
+            # Render the template directly without jsonify
+            return render_template(f'{page}.html')
+        except:
+            # Handle the error properly (returning an error page or 404)
+            return render_template('error.html'), 404

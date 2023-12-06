@@ -1,45 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hummingbird Covid Service</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/SignStyleSheet.css') }}">
-    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
-</head>
-<body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="#" onclick="window.location.href = '/userhome'">Home</a>
-        <a href="#" onclick="window.location.href = '/survey'">Survey</a>
-        <a href="#" onclick="window.location.href = '/blog'">Blog</a>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(200, 234, 155); /* Light grey background */
+      }
+      .navbar {
+        background-color: #4caf50; /* Green background to match your app theme */
+        overflow: hidden;
+      }
+      .navbar a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+      .navbar a:hover {
+        background-color: #3e8e41; /* Darker green for hover effect */
+      }
+      .hero {
+        background-image: url("your-image-url.jpg"); /* Add your hero image url here */
+        background-size: cover;
+        height: 400px;
+        position: relative;
+        color: white;
+      }
+      .hero-text {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: rgb(83, 83, 83);
+      }
+      .hero-text button {
+        background-color: #4caf50; /* Green background to match your app theme */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .hero-text button:hover {
+        background-color: #3e8e41; /* Darker green for hover effect */
+      }
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+      .footer {
+        background-color: #333; /* Dark footer */
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Welcome to Hummingbird Covid Service</h1>
+        <p>Take our survey and assess your COVID-19 risk.</p>
+        <button onclick="loadPage('survey')">Start Survey</button>
+      </div>
     </div>
 
-    <!-- Content Container -->
-    <div id="content-container">
-        <!-- Content will be loaded dynamically here -->
+    <div class="content">
+      <h2>Stay Informed. Stay Safe.</h2>
+      <p>
+        Check the latest updates on COVID-19 and understand more about how you
+        can keep yourself and your loved ones safe.
+      </p>
     </div>
 
-
-    <div class="footer">
-        <button class="TextButton" onclick="window.location.href = '/about'">About us</button>
-        <button class="TextButton" onclick="window.location.href = '/symptoms'">Covid-19 symptoms</button>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            loadPage('home');
-        });
-
-        function loadPage(page) {
-            fetch("/load_page/" + page)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('content-container').innerHTML = data.html;
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
-</body>
+    <div class="footer">Hummingbird Covid Service © 2023</div>
+  </body>
 </html>
