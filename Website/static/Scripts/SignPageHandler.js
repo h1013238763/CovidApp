@@ -395,3 +395,72 @@ function sendDataToServer() {
       console.error("Error:", error);
     });
 }
+
+
+     function loadPage(page) {
+       fetch("/api/load_page/" + page)
+         .then((response) => {
+           if (!response.ok) {
+             throw new Error("Network response was not ok");
+           }
+           return response.text();
+         })
+         .then((html) => {
+           document.getElementById("content-container").innerHTML = html;
+         })
+         .catch((error) => {
+           console.error(
+             "There has been a problem with your fetch operation:",
+             error
+           );
+         });
+     }
+
+     document.addEventListener("DOMContentLoaded", function () {
+       // Load the 'home' page by default
+       loadPage("home");
+
+       var navLinks = document.querySelectorAll(".nav-link");
+       navLinks.forEach(function (link) {
+         link.addEventListener("click", function (e) {
+           e.preventDefault(); // Prevent default anchor click behavior
+           var page = this.getAttribute("data-page"); // Get the data-page value
+           loadPage(page); // Load the clicked page
+         });
+       });
+     });
+
+
+function submitForm() {
+  // Get form data
+  console.log("Submitting form...");
+  const formData = {
+    username: JSON.parse(localStorage.getItem("userObject")).username,
+    title: document.getElementById("title").value,
+    body: document.getElementById("body").value,
+  };
+
+  // Make a POST request to the backend
+  fetch("/api/add_request_blog", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from the backend
+      if (data.blogPostRequested === "true") {
+        // Blog post added successfully
+        alert("Blog post added successfully!");
+        loadPage("blog");
+      } else {
+        // Blog post addition failed
+        alert("Failed to add blog post. Error: " + data.error_mes);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

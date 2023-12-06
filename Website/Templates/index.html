@@ -84,37 +84,7 @@
     <div id="content-container">
         <!-- Content will be loaded here dynamically -->
     </div>
-    <script>
-         function loadPage(page) {
-            fetch('/api/load_page/' + page)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    document.getElementById('content-container').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load the 'home' page by default
-            loadPage('home');
-
-            var navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent default anchor click behavior
-                    var page = this.getAttribute('data-page'); // Get the data-page value
-                    loadPage(page); // Load the clicked page
-                });
-            });
-        });
-    </script>
     <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
 
 </body>

@@ -191,7 +191,7 @@ class API_CONTROLLER:
         self.request_obj=self.request_obj
         if self.request_obj.get("title") == "" or self.request_obj.get("body") == "":
             return jsonify(blogPostRequested="false", error_mes="title and body cannot be empty"), 200
-        new_blog_post = BlogPost(id=random.randint(1000,1000000), title=self.request_obj.get("title"), body=self.request_obj.get("body"), author=self.request_obj.get("username"), verified=False)
+        new_blog_post = BlogPost(id=random.randint(1000,1000000), title=self.request_obj.get("title"), body=self.request_obj.get("body"), author=self.request_obj.get("username"), verified=True)
         db.session.add(new_blog_post)
         db.session.commit()
         return jsonify(blogPostRequested="true"), 200

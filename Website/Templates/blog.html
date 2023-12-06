@@ -6,8 +6,9 @@
   <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='CSS/BlogSheet.css') }}"
+      href="{{ url_for('static', filename='CSS/BlogStyle.css') }}"
     />
+    <script src="{{ url_for('static', filename='Scripts/SignPageHandler.js') }}"></script>
   <title>Blog Title</title>
 </head>
 <body>
@@ -31,9 +32,7 @@
     </article>
 
     <!-- Form to add a new blog post -->
-    <form id="blogForm">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
+    <div id="blogForm">
 
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" required>
@@ -41,8 +40,8 @@
       <label for="body">Body:</label>
       <textarea id="body" name="body" required></textarea>
 
-      <button type="submit">Submit</button>
-    </form>
+      <button id="submitButton" onclick="submitForm()">Submit</button>
+    </div>
   </main>
 
   <footer>
@@ -50,43 +49,6 @@
       <p>&copy; 2023 Blog Name. All rights reserved.</p>
     </div>
   </footer>
-
-  <script>
-    // Event listener for the form submission
-    document.getElementById('blogForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Get form data
-      const formData = {
-        username: document.getElementById('username').value,
-        title: document.getElementById('title').value,
-        body: document.getElementById('body').value
-      };
-
-      // Make a POST request to the backend
-      fetch('/api/add_request_blog', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Handle the response from the backend
-        if (data.blogPostRequested === 'true') {
-          // Blog post added successfully
-          alert('Blog post added successfully!');
-        } else {
-          // Blog post addition failed
-          alert('Failed to add blog post. Error: ' + data.error_mes);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  </script>
 
 </body>
 </html>
