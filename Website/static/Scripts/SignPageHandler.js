@@ -4,6 +4,9 @@ user = "";
 quest1 = "";
 quest2 = "";
 
+let userObject ={} // user object to store user information after sign in => {username, email} 
+
+
 // Sign Page Image Change Functions
 function ChangeImage()
 {
