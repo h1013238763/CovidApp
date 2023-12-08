@@ -171,8 +171,9 @@ class API_CONTROLLER:
         if not user:
             return jsonify(nextStep="false", error_mes="username not found || create account..."), 200
         else:
-            security_q = SecurityQuestions.query.filter_by(username=self.request_obj.get("username")).all()
+            security_q = SecurityQuestions.query.filter_by(username=self.request_obj.get("username")).order_by(SecurityQuestions.qnumber).all()
             questions = [self.to_dict(q) for q in security_q]
+            
             return jsonify(nextStep="true", security_questions=questions), 200 
 
 
