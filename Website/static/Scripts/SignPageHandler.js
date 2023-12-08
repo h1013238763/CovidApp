@@ -130,7 +130,7 @@ function CreateAccountEvent() {
     question1: document.getElementById("register_sq1_input").value,
     question2: document.getElementById("register_sq2_input").value,
     answer1: document.getElementById("register_sa1_input").value,
-    answer2: document.getElementById("register_sq2_input").value,
+    answer2: document.getElementById("register_sa2_input").value,
   };
   // empty check
   if (data.question1 == "") {
